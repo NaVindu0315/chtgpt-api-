@@ -1,0 +1,32 @@
+import { Component } from ‘@angular/core’;
+import { HttpClient } from ‘@angular/common/http’;
+@Component({
+selector: ‘app-root’,
+templateUrl: ‘./app.component.html’
+styleUrls: [‘./app.component.css’]
+})
+export class AppComponent {
+title = ‘lecture-slides’;
+message = “Hello World, from Angular”;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    table>
+<tr><th>Student</th><th>Course</th></tr>
+<ng-container *ngFor=“let student of students”>
+<tr *ngIf=“student.course == filter”>
+<td>{{ student.name }}</td>
+<td>{{ student.course }}</td>
+</tr>
+</ng-container>
+</table>
+<input [(ngModel)]=“filter” />
+</body>
+</html>
