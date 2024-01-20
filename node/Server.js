@@ -1,7 +1,7 @@
 const express = require('express');
 const OpenAI = require('openai');
 
-const openai = new OpenAI("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"); // Securely access API key from environment variable
+const openai = new OpenAI(process.env.OPENAI_API_KEY);// Securely access API key from environment variable
 const app = express();
 app.use(express.json());
 
