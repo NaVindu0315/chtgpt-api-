@@ -1,5 +1,6 @@
 const express = require('express');
 const OpenAI = require('openai');
+require('dotenv').config();
 
 const openai = new OpenAI(process.env.OPENAI_API_KEY);// Securely access API key from environment variable
 const app = express();
