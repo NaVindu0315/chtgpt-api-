@@ -1,40 +1,46 @@
+
 const express = require('express');
-const OpenAI = require('openai');
+const axios = require('axios');
 require('dotenv').config();
 
-const openai = new OpenAI(process.env.OPENAI_API_KEY);// Securely access API key from environment variable
+
 const app = express();
+const port = 3000; // Change this to the desired port number
+
 app.use(express.json());
 
-app.post('/generate-poem', async (req, res) => {
+const openaiKey = process.env.OPENAI_KEY;
+
+app.post('/summarize', async (req, res) => {
   try {
-    const prompt = {
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.'
-        },
-        {
-          role: 'user',
-          content: req.body.prompt // Get prompt from user request
-        }
-      ]
+    const { transcription } = req.body;
+
+    const headers = {
+      'Authorization': `Bearer ${openaiKey}`,
+      'Content-Type': 'application/json',
     };
 
-    const response = await openai.createCompletion(prompt);
-    //openai.createCompletion
-    const poem = response.data.choices[0].text;
+    const data = {
+      prompt: `Chatgpt, I need you to summarize this text: ${transcription}`,
+      max_tokens: 400,
+      model: "gpt-3.5-turbo-instruct",
+    };
 
-    res.json({ poem }); // Send the generated poem as a JSON response
+    const url = 'https://api.openai.com/v1/completions';
+
+    const response = await axios.post(url, data, { headers });
+    const summary = response.data.choices[0].text;
+
+    res.json({ summary });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Failed to generate poem' }); // Handle errors gracefully
+    res.status(500).json({ error: 'Failed to summarize' });
   }
 });
-
-const port = 3001;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+   
+   app.listen(port, () => {
+     console.log(`Server is running on port ${port}`);
+   });
 
 
 ///run this before 
