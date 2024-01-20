@@ -1,40 +1,59 @@
-const express = require('express');
-const OpenAI = require('openai');
 require('dotenv').config();
 
-const openai = new OpenAI(process.env.OPENAI_API_KEY);// Securely access API key from environment variable
+
+const express = require('express');
+
+
 const app = express();
 app.use(express.json());
+const { Configuration, OpenAIApi } = require("openai"); 
+const readlineSync = require("readline-sync"); 
+require("dotenv").config(); 
 
-app.post('/generate-poem', async (req, res) => {
-  try {
-    const prompt = {
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: 'You are a poetic assistant, skilled in explaining complex programming concepts with creative flair.'
-        },
-        {
-          role: 'user',
-          content: req.body.prompt // Get prompt from user request
-        }
-      ]
-    };
+let APIcall = async () => { 
+const newConfig = new Configuration({ 
+	apiKey: process.env.OPENAI_SECRET_KEY 
+}); 
+const openai = new OpenAIApi(newConfig); 
+	
+const chatHistory = []; 
 
-    const response = await openai.createCompletion(prompt);
-    //openai.createCompletion
-    const poem = response.data.choices[0].text;
+do { 
+	const user_input = readlineSync.question("Enter your input: "); 
+	const messageList = chatHistory.map(([input_text, completion_text]) => ({ 
+	role: "user" === input_text ? "ChatGPT" : "user", 
+	content: input_text 
+	})); 
+	messageList.push({ role: "user", content: user_input }); 
 
-    res.json({ poem }); // Send the generated poem as a JSON response
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Failed to generate poem' }); // Handle errors gracefully
-  }
-});
+	try { 
+	const GPTOutput = await openai.createChatCompletion({ 
+		model: "gpt-3.5-turbo", 
+		messages: messageList, 
+	}); 
+
+	const output_text = GPTOutput.data.choices[0].message.content; 
+	console.log(output_text); 
+
+	chatHistory.push([user_input, output_text]); 
+	} catch (err) { 
+	if (err.response) { 
+		console.log(err.response.status); 
+		console.log(err.response.data); 
+	} else { 
+		console.log(err.message); 
+	} 
+	} 
+} while (readlineSync.question("\nYou Want more Results? (Y/N)").toUpperCase() === "Y"); 
+}; 
+APIcall();
+
+
+
 
 const port = 3001;
 app.listen(port, () => console.log(`Server is running on port ${port}`));
+
 
 
 ///run this before 
