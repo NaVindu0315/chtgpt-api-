@@ -23,6 +23,7 @@ app.post('/generate-poem', async (req, res) => {
     };
 
     const response = await openai.createCompletion(prompt);
+    //openai.createCompletion
     const poem = response.data.choices[0].text;
 
     res.json({ poem }); // Send the generated poem as a JSON response
