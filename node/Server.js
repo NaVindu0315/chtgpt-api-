@@ -1,24 +1,18 @@
-
-const express = require('express');
-const OpenAI = require('openai');
-
+import OpenAI from "openai";
 
 const openai = new OpenAI();
-const app = express();
-app.use(express.json());
+
 async function main() {
-    const completion = await openai.chat.completions.create({
-      messages: [{"role": "system", "content": "You are a helpful assistant."},
-          {"role": "user", "content": "Who won the world series in 2020?"},
-          {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-          {"role": "user", "content": "Where was it played?"}],
-      model: "gpt-3.5-turbo",
-    });
-  
-    console.log(completion.choices[0]);
-  }
-  main();
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: "You are a helpful assistant." }],
+    model: "gpt-3.5-turbo",
+  });
 
+  console.log(completion.choices[0]);
+}
 
-const port = 3001;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+main();
+
+///run this before 
+
+/// setx OPENAI_API_KEY "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"
