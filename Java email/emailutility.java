@@ -32,3 +32,25 @@ import java.io.*;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+
+public class emailutility {
+    
+    public static void sendemail( String host, String port, final String username,final String password , String toaddress, String subject, String message
+    
+    )throws  AddressException , MessagingException
+    {
+        //setting smtp server properties
+        Properties properties = new Properties();
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", port);
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.tsl.trust", "smtp.gmail.com");
+        
+        Authenticator auth = new Authenticator()
+        {
+            public PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(username,password);
+            }
+        };
