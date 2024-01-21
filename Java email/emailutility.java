@@ -54,3 +54,21 @@ public class emailutility {
                 return new PasswordAuthentication(username,password);
             }
         };
+
+          Session session = Session.getInstance(properties, auth);
+        
+        
+        //creating new email message
+        Message msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(username));
+        msg.setRecipient(Message.RecipientType.TO, new InternetAddress(toaddress));
+        msg.setSubject(subject);
+        msg.setSentDate(new  Date());
+        msg.setText(message);
+        
+        //sending the mail
+        Transport.send(msg);
+        
+    }
+    
+}
