@@ -62,9 +62,9 @@ public class emailcontroller extends HttpServlet {
         /////////////////////////////////////////////
         
         String host ="smtp.gmail.com";
-        String user ="abccinemagroup05@gmail.com";
+        String user =""; ///ur email
         String port ="587";
-        String password = "qrzmdvmvtgpmxyrj";
+        String password = ""; //ur app password
         String subject =  paynow.name +" your order is Successful";
         String toaddress = paynow.email;
         String message =  "you Have sucessfully Reserved ,\nFull tickets  :  " +Config_Booking.full_tickets + "\nHalf tickets : "+ Config_Booking.kid_tickets+  "\nMovie : "+paynow.film+"\nTime : "+paynow.time+"\nDate : "+paynow.date+"\nTheator : "+paynow.theator+"\nTotal Amount : "+Config_Booking.total_price+"\nThank You For Your Purchase \nABC Cinema\n Group 5\n@NL69";
