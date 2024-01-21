@@ -40,3 +40,37 @@ import srvltpkg.Config_Booking;
 import newpackage.paynow;
 import java.sql.*;
 import dbcon.DBConnection;
+
+/**
+ *
+ * @author NaVindu69;
+ */
+@WebServlet(urlPatterns = {"/emailcontroller"})
+public class emailcontroller extends HttpServlet {
+
+  
+   
+
+   
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        PrintWriter out = response.getWriter();
+        response.setContentType("text/html");
+        /////////////////////////////////////////////
+        
+        String host ="smtp.gmail.com";
+        String user ="abccinemagroup05@gmail.com";
+        String port ="587";
+        String password = "qrzmdvmvtgpmxyrj";
+        String subject =  paynow.name +" your order is Successful";
+        String toaddress = paynow.email;
+        String message =  "you Have sucessfully Reserved ,\nFull tickets  :  " +Config_Booking.full_tickets + "\nHalf tickets : "+ Config_Booking.kid_tickets+  "\nMovie : "+paynow.film+"\nTime : "+paynow.time+"\nDate : "+paynow.date+"\nTheator : "+paynow.theator+"\nTotal Amount : "+Config_Booking.total_price+"\nThank You For Your Purchase \nABC Cinema\n Group 5\n@NL69";
+        
+       ///////////////////////////////////////////////////////
+       //entering to database
+       Connection con = null;
+       PreparedStatement nlk =null;
+       try
