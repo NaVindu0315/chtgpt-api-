@@ -74,3 +74,42 @@ public class emailcontroller extends HttpServlet {
        Connection con = null;
        PreparedStatement nlk =null;
        try
+        {
+           String newreservation ="INSERT INTO pay VALUE(?,?,?,?,?,?,?,?,?)";
+           con = DBConnection.initializeDatabase();
+           nlk = con.prepareStatement(newreservation);
+           nlk.setString(1, paynow.name);
+           nlk.setString(2, paynow.nic);
+           nlk.setString(3, paynow.email);
+           nlk.setString(4, paynow.film);
+           nlk.setString(5, paynow.theator);
+           nlk.setString(6, paynow.date);
+           nlk.setString(7, paynow.time);
+           nlk.setInt(8,Config_Booking.full_tickets );
+           nlk.setInt(9, Config_Booking.kid_tickets);
+           
+           nlk.executeUpdate();
+           con.close();
+           
+           
+           
+       }
+       catch(Exception e)
+               {
+                   out.print(e);
+               }
+       //////////////////email
+       try
+       {
+           emailutility.sendemail(host,port,user,password,toaddress,subject,message);
+           response.sendRedirect("clientside.html");
+
+       }
+       catch(Exception e)
+       {
+           out.print(e);
+       }
+    }
+
+  
+}
