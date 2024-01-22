@@ -15,3 +15,5 @@ app.post('/generate', async (req, res) => {
 
   res.json({ generated_text: response.data.choices[0].text });
 });
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`Server running on port ${port}`));
