@@ -9,7 +9,8 @@ app.post('/generate', async (req, res) => {
       max_tokens: 100
   }, {
       headers: {
-          'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+          //'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+          'Authorization': `Bearer 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`
       }
   });
 
