@@ -3,9 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PayPal </title>
 </head>
 <body>
-    
+    <form id="checkout" method="post" action="clientside.html">
+        ENter no of full tickets
+        <br>
+        <input type="number" name="fullticket" id="fullticket">
+        Enter no of half tickets
+        <br>
+        <input type="number" name="halfticket" id="halfticket">
+        <br>
+        <button type="reset">Reset</button>
+        <input type="submit" value="submit">
+        <script>
+           
+           const half = document.getElementById('halfticket');
+           
+           const full = parseInt(document.getElementById('fullticket'));
+            //let tot = (full*500)+(half*350);
+            let tot=20;
+            localStorage.setItem('totalpay',tot);
+
+          /* form.addEventListener('submit',function (e)
+           {
+            e.preventDefault();
+            /*const newhalf = halfticket.value;
+            const newfull = fullticket.value;
+            let tot = (newfull*500)+(newhalf*350);
+            let tot=33;
+
+            localStorage.setItem('total',tot);
+            window.location.href="clientside.html";
+
+           }
+           );*/
+
+        </script>
+
+    </form>
 </body>
 </html>
