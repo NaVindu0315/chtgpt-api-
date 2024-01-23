@@ -6,7 +6,7 @@ app.use(express.json());
 
 const openai = new OpenAI(
     ({
-        apiKey: "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"
+        apiKey: "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"
     })
 );
 
@@ -19,7 +19,7 @@ app.get('/getresponse', async (req, res) => {
             messages: [{
                 "role": "user",
                 "content": "essay on global warming",
-                max_tokens: 100
+               
             }]
         });
         console.log(response.choices[0].message);
