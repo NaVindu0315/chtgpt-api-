@@ -18,7 +18,7 @@ app.get('/getresponse', async (req, res) => {
             model: 'gpt-3.5-turbo',
             messages: [{
                 "role": "user",
-                "content": userPrompt
+                "content": " i want write a essay about "+userPrompt
                
             }]
         });
