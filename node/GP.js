@@ -13,6 +13,11 @@ const openai = new OpenAI(
 app.get('/getresponse', async (req, res) => {
     try {
         const userPrompt = req.body.userPrompt;
+        const studentname = req.body.studentname;
+        const studentnumber = req.body.studentnumber;
+        const studentdegree = req.body.studentdegree;
+        const studentgpa = req.body.studentgpa;
+        const studentsports = req.body.studentsports;
         console.log(userPrompt);
         const response = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
