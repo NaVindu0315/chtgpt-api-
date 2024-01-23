@@ -1,6 +1,10 @@
-import { ChatGPTAPI } from 'chatgpt'
+let ChatGPTAPI;
 
 async function example() {
+  if (!ChatGPTAPI) {
+    ChatGPTAPI = (await import('chatgpt')).ChatGPTAPI;
+  }
+
   const api = new ChatGPTAPI({
     apiKey: process.env.OPENAI_API_KEY
   })
@@ -8,4 +12,5 @@ async function example() {
   const res = await api.sendMessage('Hello World!')
   console.log(res.text)
 }
-example();
+
+module.exports = example;
