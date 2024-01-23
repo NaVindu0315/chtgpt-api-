@@ -18,12 +18,12 @@ app.get('/getresponse', async (req, res) => {
             model: 'gpt-3.5-turbo',
             messages: [{
                 "role": "user",
-                "content": "essay on global warming",
+                "content": userPrompt
                
             }]
         });
-        console.log(response.choices[0].message);
-        res.json(response.choices[0].message);
+        console.log(response.choices[0].message.content);
+        res.send(response.choices[0].message.content);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while processing your request.' });
