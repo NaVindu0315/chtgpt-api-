@@ -4,7 +4,19 @@ const app = express();
 app.use(express.json());
 
 // mongdo db data api 
+
+
 var axios = require('axios');
+
+//to prompt the student id from the user
+
+
+
+//prompting end
+
+
+//this is the working hardcoded code
+/*
 var data = JSON.stringify({
     "collection": "students",
     "database": "studentrecords",
@@ -45,7 +57,8 @@ axios(config)
     .catch(function (error) {
         console.log(error);
     });
-
+*/
+///hard coded code end
 ///mongodb data api end
 
 
