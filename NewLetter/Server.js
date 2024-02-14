@@ -3,6 +3,11 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+
 // mongdo db data api 
 
 
@@ -86,12 +91,13 @@ readline.question('Enter student ID: ', (studentid) => {
 //dn aye mekat letter generate wena mn function ekk widyt add krnw api ekk neme function ekk dammaam
 //postman one na eka kelinma terminal eke run wenw sirt mehema pennanna plwnne api ekath tynw ekath hdala denm daant functuion ekk widiyt hdmu
 
-/*
+
 ///letter generation
 // Import required libraries
 const openai = require('openai');
 
 // Initialize OpenAI with your API key (stored securely outside the code)
+
 const myApiKey = "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";
 const apk ="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" // Replace with your environment variable
 const openaiClient = new openai(apk);
@@ -140,4 +146,3 @@ generateLetterRecommendation(studentData)
 
 
 ///letter generation end
-*/
