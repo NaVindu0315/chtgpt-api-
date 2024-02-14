@@ -11,6 +11,12 @@ app.use(express.json());
 //to prompt the student id from the user
 
 const axios = require('axios');
+
+app.listen(3000,()=>{
+    //commented this console log
+   // console.log("Server is running on port 3000")
+})
+//meka tynne student number eka prompt karanna
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
@@ -19,6 +25,10 @@ const readline = require('readline').createInterface({
 // Prompt for student ID
 readline.question('Enter student ID: ', (studentid) => {
   readline.close();
+
+  //prompt krna eka methanin iwri
+
+  //me tynne methana wenne adala database eka collection eka document eka balala data ganna eka api eken meka wenas krnna dyk na
 
   const data = JSON.stringify({
     "collection": "students",
@@ -41,7 +51,8 @@ readline.question('Enter student ID: ', (studentid) => {
     },
     data
   };
-
+//me tynne methanin tham variables wlt cll krnne meke danat tynne name studnt id degree wtrine oyt one ewa mulinma mongo
+//db eke hjdala methanin ekat galapenna danna plwn mn comment krl danm ewa oy hdganna
   axios(config)
     .then(function (response) {
       if (response.data.document) {
@@ -49,6 +60,12 @@ readline.question('Enter student ID: ', (studentid) => {
         const name = student.name;
         const studentid = student.studentid;
         const degree = student.degree;
+        //const gpa = student.gpa;
+        //const sports = student.sports;
+        //const societies = student.societies;
+        //mewage oyt one ewa me wdiyt add krganna plwn
+        //me yat tyna console ek damme data hryat enwd balnna meka mn comment krnw eka aye uncomment krl oy balanna aluthin add krpu ewa enwd kyl
+
         console.log(name, studentid, degree);
 
         // ... rest of your code using the student information
@@ -68,6 +85,5 @@ readline.question('Enter student ID: ', (studentid) => {
 
 
 
-app.listen(3000,()=>{
-    console.log("Server is running on port 3000")
-})
+
+
