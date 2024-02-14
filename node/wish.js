@@ -1,5 +1,5 @@
 const express = require("express");
-const OpenAI = require("openai");
+//const OpenAI = require("openai");
 const app = express();
 app.use(express.json());
 
@@ -77,11 +77,66 @@ readline.question('Enter student ID: ', (studentid) => {
       console.log(error);
     });
 });
-
-
-
-
 //prompting end
+
+//dn me tyna eke student number eka ghuwama data enw
+//dn aye mekat letter generate wena mn function ekk widyt add krnw api ekk neme function ekk dammaam
+//postman one na eka kelinma terminal eke run wenw sirt mehema pennanna plwnne api ekath tynw ekath hdala denm daant functuion ekk widiyt hdmu
+
+
+///letter generation
+// Import required libraries
+const openai = require('openai');
+
+// Initialize OpenAI with your API key (stored securely outside the code)
+const myApiKey = "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";
+const apk ="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" // Replace with your environment variable
+const openaiClient = new openai(apk);
+
+// Function to generate letter recommendation
+async function generateLetterRecommendation(studentData) {
+  const { studentname, studentnumber, studentdegree, studentgpa, studentsports, studetfaculty } = studentData;
+
+  try {
+    // Construct the user prompt based on provided information
+    const userPrompt = `Write a letter about a student named ${studentname} with student number ${studentnumber} who studied ${studentdegree} with a GPA of ${studentgpa} and participated in ${studentsports} at our university. The letter should be written from the perspective of the Dean of the ${studetfaculty} faculty as a recommendation for a master's degree. Address the letter to "Dear Sir/Madam" and avoid including the recipient's designation or sender's designation.`;
+
+    // Send the prompt to OpenAI and extract the generated content
+    const response = await openaiClient.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: [{
+        "role": "user",
+        "content": userPrompt
+      }]
+    });
+
+    return response.choices[0].message.content;
+  } catch (error) {
+    console.error("Error generating letter:", error);
+    throw error; // Re-throw for handling in calling code
+  }
+}
+
+// Example usage:
+const studentData = {
+  studentname: "John Doe",
+  studentnumber: "123456",
+  studentdegree: "Software Engineering",
+  studentgpa: 3.8,
+  studentsports: "Basketball",
+  studetfaculty: "Engineering"
+};
+
+generateLetterRecommendation(studentData)
+  .then(letterContent => {
+    console.log("Generated letter recommendation:\n", letterContent);
+  })
+  .catch(error => {
+    console.error("Error generating letter:", error);
+  });
+
+
+///letter generation end
 
 
 
