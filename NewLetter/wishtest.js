@@ -3,9 +3,6 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-const dotenv = require('dotenv');
-
-dotenv.config();
 
 
 // mongdo db data api 
@@ -19,7 +16,7 @@ const axios = require('axios');
 
 app.listen(3000,()=>{
     //commented this console log
-   console.log("Server is running on port 3000")
+   //console.log("Server is running on port 3000")
 })
 
 /*
@@ -98,7 +95,7 @@ const openai = require('openai');
 
 // Initialize OpenAI with your API key (stored securely outside the code)
 
-const apiKey = process.env.API_KEY;
+const apiKey = "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";
 const openaiClient = new openai(apiKey);
 
 // Function to generate letter recommendation
