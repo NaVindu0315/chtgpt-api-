@@ -14,8 +14,10 @@ const axios = require('axios');
 
 app.listen(3000,()=>{
     //commented this console log
-   // console.log("Server is running on port 3000")
+   console.log("Server is running on port 3000")
 })
+
+/*
 //meka tynne student number eka prompt karanna
 const readline = require('readline').createInterface({
   input: process.stdin,
@@ -78,6 +80,7 @@ readline.question('Enter student ID: ', (studentid) => {
     });
 });
 //prompting end
+*/
 
 //dn me tyna eke student number eka ghuwama data enw
 //dn aye mekat letter generate wena mn function ekk widyt add krnw api ekk neme function ekk dammaam
