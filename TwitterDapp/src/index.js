@@ -10,9 +10,16 @@ let web3 = new Web3(window.ethereum);
 
 async function connectWallet() {
   if (window.ethereum) {
-    // 1️⃣ Request Wallet Connection from Metamask
-    // ANSWER can be found here: https://docs.metamask.io/wallet/get-started/set-up-dev-environment/
-    // const accounts = YOUR CODE
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+    .catch((err) => {
+      if (err.code === 4001) {
+        console.log('Please connect to MetaMask.');
+      } else {
+        console.error(err);
+      }
+    });
+
+    console.log(accounts);
 
     setConnected(accounts[0]);
   } else {
