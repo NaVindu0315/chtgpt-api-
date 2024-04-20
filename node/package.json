@@ -12,8 +12,9 @@
     "axios": "^1.6.5",
     "body-parser": "^1.20.2",
     "chatgpt": "^5.2.5",
-    "dotenv": "^16.3.2",
-    "express": "^4.18.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
     "nodemailer": "^6.9.13",
     "nodemon": "^3.0.3",
     "openai": "^4.24.7"
