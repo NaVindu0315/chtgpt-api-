@@ -4,7 +4,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'nmails6969@gmail.com',
-    pass: 'thus ncqp aawe gxai',
+    pass: 'wqij frps qaxq mzln',
   },
 });
 
@@ -12,11 +12,11 @@ const transporter = nodemailer.createTransport({
 async function main() {
   // send mail with defined transport object
   const info = await transporter.sendMail({
-    from: '"Maddison Foo Koch 👻" <maddison53@ethereal.email>', // sender address
+    from: 'pakaya', // sender address
     to: "navindulakshan99@gmail.com", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+   // html: "<b>Hello world?</b>", // html body
   });
 
   console.log("Message sent: %s", info.messageId);
