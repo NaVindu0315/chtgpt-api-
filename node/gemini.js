@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI('AIzaSyDClytG49R3ci29q5SnTnkWZom45cVRQ0Q');
+const genAI = new GoogleGenerativeAI('');
 
 function validateInput(input) {
   if (!input || typeof input !== "string") {
