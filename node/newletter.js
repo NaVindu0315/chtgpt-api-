@@ -1,6 +1,6 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI('');
+const genAI = new GoogleGenerativeAI('AIzaSyDClytG49R3ci29q5SnTnkWZom45cVRQ0Q');
 
 function validateInput(input) {
   if (!input || typeof input !== "string") {
@@ -35,9 +35,29 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-async function generateStory(studentname,studentnumber,studentdegree,studentgpa,studentsports) {
+async function generateStory(studentname,studentnumber,studentdegree,studentgpa,studentsports,studentclass,extracurry,faculty,Discipline,Finalproject) {
     try {
-      const prompt = "i want to write a letter about the a student nameed"+studentname+" with the student number "+studentnumber+" who studied "+studentdegree+" with a gpa of "+studentgpa+" and did  "+studentsports+" in our university  as a dean of the faculty as a recomdation for a masters degree and add recipent as Dear Sir/Madam sender is Dean Faculty of computing please dont add recipeints senders desgisnation would be engough please dont use [] in the spaces";
+      const prompt = `I want to write a letter of recommendation for a student named ${studentname} 
+      with the student ID ${studentnumber}. The student has completed a ${studentdegree} degree with a GPA of 
+      ${studentgpa} and mention about class ${studentclass}. They have also participated in ${studentsports} and
+      ${extracurry} and are part of the ${faculty} faculty. And also mention discipline record ${Discipline}. 
+      And reccomend for things with related ${Finalproject} and explain about project. Write like actual university 
+      recommendation letter letter bellow metion your roll who is generated letter.
+      Please generate the letter in the following format:
+  
+      Dear Sir/Madam,
+  
+      I am writing to recommend ${studentname} for any opportunity that requires a dedicated, hardworking, and 
+      talented individual. I have had the pleasure of teaching ${studentname} in my ${studentdegree} course, and 
+      I can confidently say that they are one of the most exceptional students I have ever had.
+      [Write the recommendation here with the student's name, student ID, faculty, degree, GPA, sports, and Discipline.
+      Make sure to write at least 3-4 paragraphs about the student's achievements, skills, and character and also have bad
+      things that should mention and explain like deciplene.
+  
+      Best regards,
+      NSBM Green University, Faculty of ${faculty}
+      `
+      ;
       const model = await genAI.getGenerativeModel({ model: "gemini-pro" });
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -49,16 +69,22 @@ async function generateStory(studentname,studentnumber,studentdegree,studentgpa,
     }
   }
   
-  app.post("/generate-story", async (req, res) => {
+  app.post("/generate-letter", async (req, res) => {
     try {
-      const { studentname,studentnumber,studentdegree,studentgpa,studentsports} = req.body;
-      if (!studentname || !studentnumber || !studentdegree || !studentgpa || !studentsports) {
+      const { studentname,studentnumber,studentdegree,studentgpa,studentsports,studentclass,extracurry,faculty,Discipline,Finalproject} = req.body;
+      if (!studentname || !studentnumber || !studentdegree || !studentgpa || !studentsports|| !studentclass|| !extracurry|| !faculty|| !Discipline|| !Finalproject) {
         return res.status(400).json({ error: "Please provide name, index, and degree" });
       }
-      const story = await generateStory(studentname,studentnumber,studentdegree,studentgpa,studentsports);
+      const story = await generateStory(studentname,studentnumber,studentdegree,studentgpa,studentsports,studentclass,extracurry,faculty,Discipline,Finalproject);
       res.json({ story });
     } catch (error) {
-      res.status(500).json({ error: "Internal Server Error" });
+      let errorMessage = "Internal Server Error";
+      if (error.name === 'ValidationError') {
+        errorMessage = "Validation Error: " + error.message;
+      } else {
+        console.error(error); // Log the complete error for debugging
+      }
+      res.status(500).json({ error: errorMessage });
     }
   });
   
