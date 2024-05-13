@@ -2,14 +2,14 @@ const express = require('express');
 const nodemailer = require('nodemailer');
 
 const app = express();
-const port = process.env.PORT || 3000; // Use environment variable for dynamic port
+const port =  3002; // Use environment variable for dynamic port
 
 // Configure Nodemailer with secure password handling (avoid storing password in plain text)
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'your_gmail_address', // Replace with your actual Gmail address
-    pass: process.env.EMAIL_PASSWORD, // Use environment variable for password
+    user: 'nmails6969@gmail.com', // Replace with your actual Gmail address
+    pass: 'wqij frps qaxq mzln', // Use environment variable for password
   },
 });
 
@@ -19,7 +19,7 @@ app.post('/send-email', async (req, res) => {
     const { recipient, message, title } = req.body; // Destructure request body
 
     const mailOptions = {
-      from: 'your_name@gmail.com', // Replace with your sender name and address
+      from: 'nmails6969@gmail.com', // Replace with your sender name and address
       to: recipient,
       subject: title,
       text: message,
