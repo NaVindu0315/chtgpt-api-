@@ -1,3 +1,5 @@
+/*
+
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('express-cors');
@@ -38,6 +40,53 @@ app.post('/send-email', async (req, res) => {
     }
   });
   
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
+*/
+
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('express-cors');
+const app = express();
+const port =  3002;
+const gmailAddress = 'nmails6969@gmail.com';
+const gmailPassword = 'wqij frps qaxq mzln';
+
+app.use(cors());
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailAddress,
+    pass: gmailPassword,
+  },
+});
+
+app.post('/send-email', async (req, res) => {
+  try {
+    const recipient = 'navindulakshan99@gmail.com';
+    const subject = 'hutti';
+    const message = 'paka';
+
+    const mailOptions = {
+      from: gmailAddress,
+      to: recipient,
+      subject: subject,
+      text: message,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+
+    // Add the Access-Control-Allow-Origin header to the response
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.json({ message: 'Email sent successfully!', info });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error sending email!' });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
