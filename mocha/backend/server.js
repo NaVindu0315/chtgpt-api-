@@ -1,8 +1,9 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
-
+const cors = require('express-cors');
 const app = express();
 const port =  3002; // Use environment variable for dynamic port
+app.use(cors());
 
 // Configure Nodemailer with secure password handling (avoid storing password in plain text)
 const transporter = nodemailer.createTransport({
