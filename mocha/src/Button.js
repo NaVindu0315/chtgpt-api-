@@ -30,7 +30,7 @@ const Button = () => {
 
 export default Button;
 */
-
+/*
 import React from 'react';
 
 const Button = () => {
@@ -69,3 +69,35 @@ const Button = () => {
 };
 
 export default Button;
+*/
+import React, { useState } from 'react';
+
+const SendEmailButton = ({ port }) => {
+  const [emailSent, setEmailSent] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleClick = async () => {
+    try {
+      const response = await fetch(`http://localhost:3002/send-email`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      if (response.ok) {
+        setEmailSent(true);
+      } else {
+        setError('Error sending email!');
+      }
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  return (
+    <button onClick={handleClick}>
+      {emailSent ? 'Email sent successfully!' : 'Send Email'}
+    </button>
+  );
+};
+
+export default SendEmailButton;

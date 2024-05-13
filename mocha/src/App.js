@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 
-import Button from './Button'; 
+import SendEmailButton from './Button'; 
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         >
           Learn React
         </a>
-        <Button />
+        <SendEmailButton />
       </header>
     </div>
   );
