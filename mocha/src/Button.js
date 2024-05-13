@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import axios from 'axios'; // Use axios for making HTTP requests
 
 const Button = () => {
-  const [recipient, setRecipient] = useState('');
-  const [message, setMessage] = useState('');
-  const [title, setTitle] = useState('');
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:3002/send-email', {
-        recipient,
-        message,
-        title,
+       
       });
 
       console.log('Email response:', response.data);
@@ -26,20 +22,49 @@ const Button = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>
-        Recipient:
-        <input type="email" value={recipient} onChange={(e) => setRecipient(e.target.value)} />
-      </label>
-      <label>
-        Message:
-        <textarea value={message} onChange={(e) => setMessage(e.target.value)} />
-      </label>
-      <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
+        <h1>Send Email</h1>
       <button type="submit">Send Email</button>
     </form>
+  );
+};
+
+export default Button;
+*/
+
+import React from 'react';
+
+const Button = () => {
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3002/send-email', { // Replace with your server URL
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          recipient: 'navindulakshan99@gmail.com', // Hardcoded recipient (replace if needed)
+          message: 'paka', // Hardcoded message (replace if needed)
+          title: 'hutti', // Hardcoded title (replace if needed)
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.message === 'Email sent successfully!') {
+        console.log('Email sent successfully!');
+        // Handle successful email sending (e.g., display success message)
+      } else {
+        console.error('Error:', data.message);
+        // Handle email sending errors (e.g., display error message)
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle network or other errors
+    }
+  };
+
+  return (
+    <button type="button" onClick={handleSubmit}>
+      Send Email
+    </button>
   );
 };
 
