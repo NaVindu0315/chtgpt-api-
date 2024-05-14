@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^8.2.2",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express-cors": "^0.0.3",
     "nodemailer": "^6.9.13",
