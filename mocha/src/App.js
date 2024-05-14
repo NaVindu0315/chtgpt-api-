@@ -1,7 +1,8 @@
-/*import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 
 import EmailForm from './Button'; 
+import EmailSender from './Emailsender';
 
 function App() {
   return (
@@ -19,15 +20,14 @@ function App() {
         >
           Learn React
         </a>
-        <EmailForm />
+        <EmailSender />
       </header>
     </div>
   );
 }
 
 export default App;
-*/
-
+/*
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
@@ -97,6 +97,7 @@ function App() {
 }
 
 export default App;
+*/
 
 
 /*

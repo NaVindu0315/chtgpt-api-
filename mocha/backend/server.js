@@ -45,7 +45,7 @@ app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
 */
-
+/*
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('express-cors');
@@ -91,3 +91,33 @@ app.post('/send-email', async (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
+
+*/
+const express = require('express');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors'); // Add this line
+const path = require('path');
+const http = require('http');
+const socketIO = require('socket.io');
+const formatMessage = require('./utils/messages');
+const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/users');
+
+const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(cors()); // Add this line
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+const server = http.createServer(app);
+const io = socketIO(server);
+
+io.on('connection', (socket) => {
+  // ... (rest of your code)
+});
+
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log(`Server Running at ${PORT}`));
