@@ -97,3 +97,14 @@ function App() {
 }
 
 export default App;
+
+
+/*
+
+  "axios": "^0.19.1",
+    "http-proxy-middleware": "^0.20.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
+
+*/
